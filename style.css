@@ -2,9 +2,11 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to top right, #ffe5b4, #ffd1dc, #a8edea);
+  overflow: hidden; /* ⛔ empêche le scroll vertical */
   font-family: 'Segoe UI', 'Pacifico', cursive;
+  background: linear-gradient(to top right, #ffe5b4, #ffd1dc, #a8edea);
 }
+
 
 body {
   overflow-x: hidden;
@@ -13,28 +15,29 @@ body {
 
 /* Emballage */
 .wrapper {
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
-  padding: 40px 20px;
+  align-items: center;
   background: url('images/plage_tahiti.jpg') no-repeat center center;
   background-size: cover;
+  overflow: hidden;
 }
+
 
 /* Carte principale */
 .carte {
   width: 90vw;
   max-width: 600px;
-  min-width: 280px;
+  height: auto;
+  max-height: 90vh; /* limite la hauteur */
+  overflow: auto;
   perspective: 1000px;
-  cursor: pointer;
-  margin: auto;
   animation: appearZoom 1s ease-out forwards;
-  opacity: 0;
   position: relative;
 }
+
 
 /* Faces */
 .face {
