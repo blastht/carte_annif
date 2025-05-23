@@ -1,0 +1,228 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to top right, #ffe5b4, #ffd1dc, #a8edea);
+  font-family: 'Segoe UI', 'Pacifico', cursive;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Emballage */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px 20px;
+  background: url('images/plage_tahiti.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+/* Carte principale */
+.carte {
+  width: 90vw;
+  max-width: 600px;
+  min-width: 280px;
+  perspective: 1000px;
+  cursor: pointer;
+  margin: auto;
+  animation: appearZoom 1s ease-out forwards;
+  opacity: 0;
+  position: relative;
+}
+
+/* Faces */
+.face {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  padding: 30px 20px;
+  box-sizing: border-box;
+  transition: transform 0.8s;
+}
+
+.face-devant {
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('images/fleur_tiaré.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #2c2c2c;
+  text-align: center;
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.face-interieur {
+  background-color: #fffaf0;
+  color: #333;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+/* Texte */
+.face-devant h1, .face-interieur h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #e2725b;
+}
+
+.sous-texte {
+  font-style: italic;
+  font-size: 14px;
+  color: #444;
+}
+
+.face-interieur p {
+  font-size: 17px;
+  text-align: center;
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+/* Animation ouverture */
+.carte.ouverte .face-devant {
+  transform: rotateY(-180deg);
+}
+.carte.ouverte .face-interieur {
+  transform: rotateY(0deg);
+  z-index: 3;
+}
+
+/* Photo souvenir */
+.photo {
+  width: 90%;
+  max-width: 350px;
+  border-radius: 16px;
+  margin: 20px 0;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Souvenir */
+#souvenir {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  margin-top: 25px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+#souvenir.reveal {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Cœur battant */
+.heart {
+  animation: pulse 1s infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Bouton mute */
+#muteBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  background: #fff8f0;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* Pluie de pétales */
+#petales-container {
+  position: fixed;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-image: url('images/fleur_tiaré.svg');
+  background-size: cover;
+  opacity: 0.9;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Boutons */
+button {
+  background: linear-gradient(135deg, #fcd5ce, #ffb3b3);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .face-interieur p {
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+}
+
+@keyframes appearZoom {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}

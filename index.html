@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>🌺 Carte d’Anniversaire pour Maman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="carte" onclick="ouvrirCarte()">
+      <div class="face face-devant">
+        <h1>🌸 Joyeux Anniversaire Maman 🌸</h1>
+        <p class="sous-texte">Clique pour ouvrir ta surprise 🌴</p>
+      </div>
+      <div class="face face-interieur">
+        <h2>Ia ora na i to ‘oe mahana fana’o !</h2>
+        <p>
+          Que cette journée soit aussi belle que les fleurs de Tahiti.<br>
+          Merci d’être la lumière de ma vie, je t’aime fort<br>
+          – Ton fils, <span class="heart">❤️</span> <strong>Keitini COSSAVELLA</strong>.
+        </p>
+        <img src="images/votre_photo.jpg" alt="Nous deux 🌺" class="photo">
+        <button onclick="afficherSouvenir(event)">🌺 Souvenir de Tahiti</button>
+        <div id="souvenir" class="souvenir">
+          <img src="images/votre_image.jpg" class="photo">
+          <p>Souviens-toi quand on a cueilli cette fleur près de la plage 🌊</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="musique" loop>
+    <source src="sons/sons_fleur.mp3" type="audio/mpeg">
+    Ton navigateur ne supporte pas l’audio 😢.
+  </audio>
+
+  <button id="muteBtn" onclick="toggleMute()">🔇 Couper le son</button>
+  <div id="petales-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>
