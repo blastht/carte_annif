@@ -1,40 +1,38 @@
-function ouvrirCarte() {
-  const carte = document.querySelector('.carte');
-  const audio = document.getElementById('musique');
-  carte.classList.toggle('ouverte');
-
-  if (carte.classList.contains('ouverte')) {
-    audio.play();
-    lancerPetales();
-  } else {
-    audio.pause();
-    audio.currentTime = 0;
-  }
+function ouvrirMessage() {
+  document.getElementById("message").style.opacity = "1";
 }
 
-function toggleMute() {
-  const audio = document.getElementById('musique');
-  const muteBtn = document.getElementById('muteBtn');
-  audio.muted = !audio.muted;
-  muteBtn.textContent = audio.muted ? '🔊 Remettre le son' : '🔇 Couper le son';
+const images = [
+  { src: "images/tahiti1.jpg", caption: "Moment en famille ❤️" },
+  { src: "images/tahiti2.jpg", caption: "Sourire radieux en robe rouge ✨" },
+  { src: "images/tahiti3.jpg", caption: "La petite perle du Pacifique 🐚" },
+  { src: "images/tahiti4.jpg", caption: "Balade à l’ombre des grands lieux" }
+];
+
+let index = 0;
+const photo = document.getElementById("photo");
+const caption = document.getElementById("caption");
+
+// Préchargement
+images.forEach(img => {
+  const preload = new Image();
+  preload.src = img.src;
+});
+
+function updateImage() {
+  photo.classList.remove("visible");
+  setTimeout(() => {
+    photo.src = images[index].src;
+    caption.textContent = images[index].caption;
+    photo.classList.add("visible");
+  }, 200);
 }
 
-function afficherSouvenir(event) {
-  event.stopPropagation();
-  const souvenir = document.getElementById('souvenir');
-  souvenir.classList.remove('reveal');
-  void souvenir.offsetWidth; // Force reflow
-  souvenir.classList.add('reveal');
+function changeImage(direction) {
+  index = (index + direction + images.length) % images.length;
+  updateImage();
 }
 
-function lancerPetales() {
-  const container = document.getElementById('petales-container');
-  for (let i = 0; i < 15; i++) {
-    const petal = document.createElement('div');
-    petal.className = 'petal';
-    petal.style.left = Math.random() * 100 + 'vw';
-    petal.style.animationDuration = (3 + Math.random() * 8) + 's';
-    container.appendChild(petal);
-    setTimeout(() => petal.remove(), 8000);
-  }
-}
+setInterval(() => {
+  changeImage(1);
+}, 6000); // Optionnel : automatique toutes les 6s
